@@ -7,6 +7,7 @@ import (
     "time"
     "fmt"
     "os"
+    "net"
 )
 
 var startTime time.Time
@@ -23,12 +24,16 @@ func statusHandler(w http.ResponseWriter, r *http.Request) {
     t := time.Now().Format(time.RFC1123)
     u := uptime()
     h, err := os.Hostname()
-	if err != nil {
-		//panic(err)
+    if err != nil {
+        //panic(err)
         h = "unknown"
-	}
+    }
+    addrs, err := net.LookupHost(h)
+    if err != nil {
+        log.Printf("Cant get ipaddrr")
+    }
 
-    fmt.Fprintf(w, "Time: %s | host: %s | uptime: %s | version: %s\n", t , h, u, version)
+    fmt.Fprintf(w, "Time: %s | host: %s | ipaddr: %s | uptime: %s | version: %s\n", t , h, addrs, u, version)
 }
 
 const version string = "1.2.3-4"
