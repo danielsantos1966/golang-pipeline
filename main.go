@@ -36,7 +36,7 @@ func statusHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "Time: %s | host: %s | ipaddr: %s | uptime: %s | version: %s\n", t , h, addrs, u, version)
 }
 
-const version string = "1.2.3-4"
+const version string = "2.2.2-222"
 
 // VersionHandler handles incoming requests to /version
 // and just returns a simple version number
