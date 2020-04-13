@@ -6,6 +6,7 @@ import (
 	"net/http"
     "time"
     "fmt"
+    "os"
 )
 
 var startTime time.Time
@@ -21,7 +22,13 @@ func init() {
 func statusHandler(w http.ResponseWriter, r *http.Request) {
     t := time.Now().Format(time.RFC1123)
     u := uptime()
-    fmt.Fprintf(w, "Time: %s | uptime: %s | version: %s", t , u, version)
+    h, err := os.Hostname()
+	if err != nil {
+		//panic(err)
+        h = "unknown"
+	}
+
+    fmt.Fprintf(w, "Time: %s | host: %s | uptime: %s | version: %s\n", t , h, u, version)
 }
 
 const version string = "1.2.3-4"
