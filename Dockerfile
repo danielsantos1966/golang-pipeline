@@ -1,9 +1,8 @@
-FROM alpine
+FROM ubuntu:18.04
 
 WORKDIR /bin
 
 ADD golang-pipeline /bin/golang-pipeline
-ADD . /go/src/golang-pipeline
 
 RUN chmod +x /bin/golang-pipeline
 
